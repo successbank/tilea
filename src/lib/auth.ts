@@ -13,6 +13,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
   session: { strategy: 'jwt' },
+  allowDangerousEmailAccountLinking: true,
   providers: [
     Kakao({
       clientId: process.env.KAKAO_CLIENT_ID,
