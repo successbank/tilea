@@ -31,6 +31,7 @@ model User {
   accounts        Account[]
   sessions        Session[]
   businessProfile BusinessProfile?
+  cuttingProjects CuttingProject[]
 
   @@map("users")
 }
@@ -122,4 +123,26 @@ model BusinessProfile {
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("business_profiles")
+}
+
+model CuttingProject {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  name         String   @default("새 프로젝트")
+
+  sheetWidth   Int      @map("sheet_width")
+  sheetHeight  Int      @map("sheet_height")
+  sheetPrice   Float?   @map("sheet_price")
+  kerf         Float    @default(3)
+  grainEnabled Boolean  @default(false) @map("grain_enabled")
+
+  parts        Json
+  result       Json?
+
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("cutting_projects")
 }
