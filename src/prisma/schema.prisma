@@ -47,6 +47,15 @@ model User {
   auctionBids     AuctionBid[]
   reviewsWritten  Review[] @relation("reviewer")
   reviewsReceived Review[] @relation("target")
+  products        Product[]
+  orders          Order[]
+  productReviews  ProductReview[]
+  enrollments     Enrollment[]
+  courseReviews   CourseReview[]
+  sentMessages    Message[]      @relation("sender")
+  receivedMessages Message[]     @relation("receiver")
+  notifications   Notification[]
+  instructorPayouts InstructorPayout[]
   points          Int      @default(0)
 
   @@map("users")
@@ -617,4 +626,318 @@ enum ContractStatus {
   IN_PROGRESS
   CONTRACT_COMPLETED
   DISPUTED
+}
+
+// ========== PRD11: 마켓플레이스 상품 ==========
+
+model Product {
+  id            String        @id @default(cuid())
+  sellerId      String        @map("seller_id")
+  title         String
+  description   String        @db.Text
+  categoryId    String        @map("category_id")
+  price         Float
+  salePrice     Float?        @map("sale_price")
+  stock         Int           @default(0)
+  images        String[]
+  videoUrl      String?       @map("video_url")
+  specs         Json?
+  brand         String?
+  status        ProductStatus @default(ACTIVE)
+  averageRating Float         @default(0) @map("average_rating")
+  reviewCount   Int           @default(0) @map("review_count")
+  salesCount    Int           @default(0) @map("sales_count")
+
+  category      ProductCategory @relation(fields: [categoryId], references: [id])
+  seller        User            @relation(fields: [sellerId], references: [id], onDelete: Cascade)
+  reviews       ProductReview[]
+  orderItems    OrderItem[]
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@map("products")
+}
+
+model ProductCategory {
+  id        String             @id @default(cuid())
+  name      String
+  slug      String             @unique
+  parentId  String?            @map("parent_id")
+  depth     Int                @default(0)
+  sortOrder Int                @default(0) @map("sort_order")
+
+  parent    ProductCategory?   @relation("subcategories", fields: [parentId], references: [id])
+  children  ProductCategory[]  @relation("subcategories")
+  products  Product[]
+
+  @@map("product_categories")
+}
+
+model ProductReview {
+  id        String   @id @default(cuid())
+  productId String   @map("product_id")
+  userId    String   @map("user_id")
+  rating    Float
+  content   String?  @db.Text
+  images    String[]
+  createdAt DateTime @default(now()) @map("created_at")
+
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("product_reviews")
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  SOLDOUT
+}
+
+// ========== PRD12: 주문/결제 ==========
+
+model Order {
+  id          String      @id @default(cuid())
+  orderNo     String      @unique @map("order_no")
+  buyerId     String      @map("buyer_id")
+  totalAmount Float       @map("total_amount")
+  status      OrderStatus @default(PENDING)
+
+  items       OrderItem[]
+  payment     Payment?
+  shipping    ShippingInfo?
+
+  buyer       User        @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String  @map("order_id")
+  productId String  @map("product_id")
+  sellerId  String  @map("seller_id")
+  quantity  Int
+  unitPrice Float   @map("unit_price")
+  amount    Float
+
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Payment {
+  id         String        @id @default(cuid())
+  orderId    String        @unique @map("order_id")
+  paymentKey String        @unique @map("payment_key")
+  method     String
+  amount     Float
+  status     PaymentStatus @default(PAYMENT_PENDING)
+  approvedAt DateTime?     @map("approved_at")
+
+  order      Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+model ShippingInfo {
+  id               String         @id @default(cuid())
+  orderId          String         @unique @map("order_id")
+  carrier          String?
+  trackingNo       String?        @map("tracking_no")
+  status           ShippingStatus @default(PREPARING)
+  shippedAt        DateTime?      @map("shipped_at")
+  deliveredAt      DateTime?      @map("delivered_at")
+  recipientName    String         @map("recipient_name")
+  recipientPhone   String         @map("recipient_phone")
+  recipientAddress String         @map("recipient_address")
+
+  order            Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("shipping_infos")
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPING
+  DELIVERED
+  ORDER_COMPLETED
+  ORDER_CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PAYMENT_PENDING
+  APPROVED
+  PAYMENT_CANCELLED
+  PAYMENT_REFUNDED
+}
+
+enum ShippingStatus {
+  PREPARING
+  SHIPPED
+  SHIP_DELIVERED
+}
+
+// ========== PRD14-15: 온라인 클래스 ==========
+
+model Course {
+  id            String         @id @default(cuid())
+  instructorId  String         @map("instructor_id")
+  title         String
+  slug          String         @unique
+  description   String         @db.Text
+  coverImage    String?        @map("cover_image")
+  category      String
+  price         Float          @default(0)
+  salePrice     Float?         @map("sale_price")
+  level         String?
+  isPublished   Boolean        @default(false) @map("is_published")
+  averageRating Float          @default(0) @map("average_rating")
+  reviewCount   Int            @default(0) @map("review_count")
+  enrollCount   Int            @default(0) @map("enroll_count")
+
+  sections      CourseSection[]
+  enrollments   Enrollment[]
+  reviews       CourseReview[]
+
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+
+  @@map("courses")
+}
+
+model CourseSection {
+  id        String   @id @default(cuid())
+  courseId   String   @map("course_id")
+  title     String
+  sortOrder Int      @default(0) @map("sort_order")
+
+  lessons   Lesson[]
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@map("course_sections")
+}
+
+model Lesson {
+  id        String   @id @default(cuid())
+  sectionId String   @map("section_id")
+  title     String
+  videoUrl  String?  @map("video_url")
+  duration  Int?
+  isFree    Boolean  @default(false) @map("is_free")
+  sortOrder Int      @default(0) @map("sort_order")
+  quiz      Json?
+
+  progress  LessonProgress[]
+  section   CourseSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@map("lessons")
+}
+
+model Enrollment {
+  id          String    @id @default(cuid())
+  courseId     String    @map("course_id")
+  userId      String    @map("user_id")
+  paymentId   String?   @map("payment_id")
+  progress    Float     @default(0)
+  completedAt DateTime? @map("completed_at")
+
+  lessonProgress LessonProgress[]
+  createdAt   DateTime  @default(now()) @map("created_at")
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, userId])
+  @@map("enrollments")
+}
+
+model LessonProgress {
+  id             String     @id @default(cuid())
+  enrollmentId   String     @map("enrollment_id")
+  lessonId       String     @map("lesson_id")
+  watchedSeconds Int        @default(0) @map("watched_seconds")
+  isCompleted    Boolean    @default(false) @map("is_completed")
+  completedAt    DateTime?  @map("completed_at")
+
+  enrollment     Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  lesson         Lesson     @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([enrollmentId, lessonId])
+  @@map("lesson_progress")
+}
+
+model CourseReview {
+  id        String   @id @default(cuid())
+  courseId   String   @map("course_id")
+  userId    String   @map("user_id")
+  rating    Float
+  content   String?  @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, userId])
+  @@map("course_reviews")
+}
+
+model InstructorPayout {
+  id           String       @id @default(cuid())
+  instructorId String       @map("instructor_id")
+  period       String
+  grossAmount  Float        @map("gross_amount")
+  commission   Float
+  tax          Float
+  netAmount    Float        @map("net_amount")
+  status       PayoutStatus @default(PAYOUT_PENDING)
+  paidAt       DateTime?    @map("paid_at")
+
+  instructor   User         @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  @@map("instructor_payouts")
+}
+
+enum PayoutStatus {
+  PAYOUT_PENDING
+  PROCESSING
+  PAYOUT_PAID
+}
+
+// ========== PRD16: 메시징/알림 ==========
+
+model Message {
+  id         String   @id @default(cuid())
+  senderId   String   @map("sender_id")
+  receiverId String   @map("receiver_id")
+  content    String   @db.Text
+  images     String[]
+  isRead     Boolean  @default(false) @map("is_read")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  sender     User     @relation("sender", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User     @relation("receiver", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  type      String
+  title     String
+  message   String
+  link      String?
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
 }

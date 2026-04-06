@@ -5,6 +5,8 @@ const navItems = [
   { href: '/news', label: '뉴스' },
   { href: '/trade', label: '중고거래' },
   { href: '/auction', label: '역경매' },
+  { href: '/market', label: '마켓' },
+  { href: '/learn', label: '클래스' },
 ];
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
