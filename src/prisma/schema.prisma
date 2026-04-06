@@ -28,8 +28,9 @@ model User {
   updatedAt   DateTime  @updatedAt @map("updated_at")
   lastLoginAt DateTime? @map("last_login_at")
 
-  accounts Account[]
-  sessions Session[]
+  accounts        Account[]
+  sessions        Session[]
+  businessProfile BusinessProfile?
 
   @@map("users")
 }
@@ -84,4 +85,41 @@ enum UserStatus {
   ACTIVE
   SUSPENDED
   WITHDRAWN
+}
+
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model BusinessProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique @map("user_id")
+  businessNumber  String   @unique @map("business_number")
+  businessName    String   @map("business_name")
+  ownerName       String   @map("owner_name")
+  businessType    String?  @map("business_type")
+  shopName        String?  @map("shop_name")
+  introduction    String?  @db.Text
+  specialty       String[]
+  address         String?
+  addressDetail   String?  @map("address_detail")
+  phone           String?
+  website         String?
+
+  verificationStatus VerificationStatus @default(PENDING) @map("verification_status")
+  verifiedAt      DateTime? @map("verified_at")
+
+  portfolioImages String[] @map("portfolio_images")
+
+  averageRating   Float    @default(0) @map("average_rating")
+  reviewCount     Int      @default(0) @map("review_count")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("business_profiles")
 }
