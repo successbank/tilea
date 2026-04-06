@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { SessionProvider } from '@/components/auth/session-provider';
 import './globals.css';
 
@@ -8,8 +9,16 @@ export const metadata: Metadata = {
     default: 'tilea - 목공·목재 산업 종합 플랫폼',
   },
   description:
-    '재단 계산, 견적 관리, 재고 관리, 커뮤니티, 마켓플레이스까지. 목공·목재 산업을 위한 올인원 SaaS 플랫폼.',
-  keywords: ['목공', '목재', '재단계산기', '견적서', '재고관리', '목공커뮤니티'],
+    '재단 계���, 견적 관리, 재고 관리, 커뮤니티, 마켓��레이스까지. 목공·목재 산업을 위한 올인원 SaaS 플랫폼.',
+  keywords: ['목공', '목재', '재단계산기', '견적서', '재고관리', '목���커뮤니티'],
+  openGraph: {
+    title: 'tilea - 목공·목재 산업 종합 플���폼',
+    description: '재단 계산, 견적 관리, 재고 관리, 커뮤니티, 마켓플레이스까���.',
+    url: 'https://tilea.kr',
+    siteName: 'tilea',
+    locale: 'ko_KR',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -17,6 +26,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body>
         <SessionProvider>{children}</SessionProvider>
+        {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+          <Script
+            src={`${process.env.NEXT_PUBLIC_UMAMI_URL || 'https://analytics.tilea.kr'}/script.js`}
+            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

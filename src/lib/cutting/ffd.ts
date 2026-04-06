@@ -46,6 +46,8 @@ export function ffdOptimize(
   const bins: { remaining: number; placements: LinearPlacement[] }[] = [];
 
   for (const part of expanded) {
+    if (part.length > stockLength) continue; // 원재보다 긴 부재 스킵
+
     const partWithKerf = part.length + kerf;
     let placed = false;
 
