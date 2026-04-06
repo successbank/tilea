@@ -19,6 +19,8 @@ const config: Config = {
           DEFAULT: 'var(--color-accent)',
         },
         background: 'var(--color-background)',
+        'surface-alt': 'var(--color-surface-alt)',
+        'surface-dim': 'var(--color-surface-dim)',
         foreground: 'var(--color-text)',
         muted: {
           DEFAULT: 'var(--color-text-muted)',
@@ -37,6 +39,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        headline: ['Plus Jakarta Sans', 'Pretendard', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
