@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { SocialLoginButtons } from '@/components/auth/social-login-buttons';
+import { LoginForm } from '@/components/auth/login-form';
 
 export default function LoginPage() {
   return (
@@ -8,36 +10,26 @@ export default function LoginPage() {
         <p className="text-muted">목공·목재 산업 종합 플랫폼</p>
       </div>
 
-      <div className="space-y-3">
-        {/* 소셜 로그인 버튼 플레이스홀더 (prd1에서 구현) */}
-        <button
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#FEE500] px-4 py-3 font-medium text-[#191919]"
-          disabled
-        >
-          카카오로 시작하기
-        </button>
-        <button
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#03C75A] px-4 py-3 font-medium text-white"
-          disabled
-        >
-          네이버로 시작하기
-        </button>
-        <button
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-border bg-white px-4 py-3 font-medium text-foreground"
-          disabled
-        >
-          Google로 시작하기
-        </button>
+      <SocialLoginButtons />
+
+      <div className="my-6 flex items-center gap-4">
+        <div className="h-px flex-1 bg-border" />
+        <span className="text-sm text-muted">또는</span>
+        <div className="h-px flex-1 bg-border" />
       </div>
 
-      <p className="mt-6 text-center text-sm text-muted">
-        prd1에서 인증 시스템 구현 예정
-      </p>
+      <LoginForm />
 
-      <div className="mt-6 text-center">
-        <Link href="/" className="text-sm text-primary hover:underline">
-          홈으로 돌아가기
+      <div className="mt-6 space-y-2 text-center text-sm">
+        <Link href="/auth/forgot-password" className="text-muted hover:text-primary">
+          비밀번호를 잊으셨나요?
         </Link>
+        <p className="text-muted">
+          아직 회원이 아니신가요?{' '}
+          <Link href="/auth/register" className="font-medium text-primary hover:underline">
+            회원가입
+          </Link>
+        </p>
       </div>
     </div>
   );
