@@ -10,7 +10,7 @@ src/out/
 src/build/
 
 # Prisma
-src/prisma/migrations/
+# Note: migrations/ must be tracked for production deployments
 
 # Environment
 .env.local
