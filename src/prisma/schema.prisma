@@ -32,6 +32,7 @@ model User {
   sessions        Session[]
   businessProfile BusinessProfile?
   cuttingProjects CuttingProject[]
+  estimates       Estimate[]
 
   @@map("users")
 }
@@ -145,4 +146,42 @@ model CuttingProject {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("cutting_projects")
+}
+
+model Estimate {
+  id              String         @id @default(cuid())
+  userId          String         @map("user_id")
+  estimateNo      String         @unique @map("estimate_no")
+
+  customerName    String         @map("customer_name")
+  customerPhone   String?        @map("customer_phone")
+  customerEmail   String?        @map("customer_email")
+  customerAddress String?        @map("customer_address")
+
+  items           Json
+  subtotal        Float          @default(0)
+  marginRate      Float          @default(10) @map("margin_rate")
+  marginAmount    Float          @default(0) @map("margin_amount")
+  totalAmount     Float          @default(0) @map("total_amount")
+
+  status          EstimateStatus @default(DRAFT)
+  validUntil      DateTime?      @map("valid_until")
+  notes           String?        @db.Text
+  templateType    String?        @map("template_type")
+
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("estimates")
+}
+
+enum EstimateStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  CONTRACTED
+  COMPLETED
+  REJECTED
 }
