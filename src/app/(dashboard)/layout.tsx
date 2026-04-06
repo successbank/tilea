@@ -9,6 +9,8 @@ const navItems = [
   { href: '/dashboard/inventory', label: '재고 관리', icon: '📦' },
   { href: '/dashboard/projects', label: '프로젝트', icon: '🗂' },
   { href: '/dashboard/crm', label: 'CRM', icon: '👥' },
+  { href: '/dashboard/finance', label: '매출 대시보드', icon: '💰' },
+  { href: '/dashboard/messages', label: '메시지', icon: '💬' },
   { href: '/dashboard/settings/business', label: '사업자 정보', icon: '🏢' },
 ];
 
