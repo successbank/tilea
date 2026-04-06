@@ -54,7 +54,24 @@ export const resetPasswordSchema = z
     path: ['confirmPassword'],
   });
 
+export const onboardingSchema = z.object({
+  name: z.string().min(2, '2자 이상 입력하세요'),
+  phone: z
+    .string()
+    .regex(/^01[0-9]\d{7,8}$/, '유효한 전화번호를 입력하세요')
+    .optional()
+    .or(z.literal('')),
+  agreedTerms: z.literal(true, {
+    errorMap: () => ({ message: '이용약관에 동의해주세요' }),
+  }),
+  agreedPrivacy: z.literal(true, {
+    errorMap: () => ({ message: '개인정보처리방침에 동의해주세요' }),
+  }),
+  agreedMarketing: z.boolean().default(false),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
+export type OnboardingInput = z.infer<typeof onboardingSchema>;

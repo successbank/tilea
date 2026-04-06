@@ -32,6 +32,7 @@ export async function POST(request: Request) {
         password: hashedPassword,
         name,
         phone: phone || null,
+        onboardingCompleted: true,
         agreedTerms,
         agreedPrivacy,
         agreedMarketing,

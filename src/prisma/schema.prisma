@@ -18,6 +18,8 @@ model User {
   role          UserRole   @default(GENERAL)
   status        UserStatus @default(ACTIVE)
 
+  onboardingCompleted Boolean @default(false) @map("onboarding_completed")
+
   agreedTerms     Boolean @default(false) @map("agreed_terms")
   agreedPrivacy   Boolean @default(false) @map("agreed_privacy")
   agreedMarketing Boolean @default(false) @map("agreed_marketing")

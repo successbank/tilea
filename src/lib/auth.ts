@@ -74,6 +74,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: user.name,
           image: user.image,
           role: user.role,
+          onboardingCompleted: user.onboardingCompleted,
         };
       },
     }),
@@ -81,10 +82,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   events: {
     async signIn({ user }) {
       if (user.id) {
-        await prisma.user.update({
+        const dbUser = await prisma.user.update({
           where: { id: user.id },
           data: { lastLoginAt: new Date() },
         });
+        user.onboardingCompleted = dbUser.onboardingCompleted;
       }
     },
   },
