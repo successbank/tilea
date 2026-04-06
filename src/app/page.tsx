@@ -16,7 +16,7 @@ export default function HomePage() {
         </p>
         <div className="flex gap-4">
           <Link
-            href="/login"
+            href="/auth/login"
             className="rounded-lg bg-primary px-8 py-3 font-medium text-white transition-colors hover:opacity-90"
           >
             시작하기

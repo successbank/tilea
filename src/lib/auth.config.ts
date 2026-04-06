@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from 'next-auth';
+import type { UserRole } from '@prisma/client';
 
 export const authConfig = {
   pages: {
