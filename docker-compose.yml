@@ -35,7 +35,7 @@ services:
       redis:
         condition: service_started
     logging: *default-logging
-    command: sh -c "npm install && npx prisma generate && npm run dev"
+    command: sh -c "apk add --no-cache openssl && npm install && npx prisma generate && npm run dev"
 
   database:
     image: postgres:16-alpine
