@@ -10,6 +10,7 @@ import { CuttingLayoutSVG } from '@/components/cutting/cutting-layout-svg';
 import { PartsTable, type PartRow } from '@/components/cutting/parts-table';
 import type { CuttingResult } from '@/lib/cutting/guillotine';
 import type { LinearCuttingResult } from '@/lib/cutting/ffd';
+import { CuttingPDFButton } from '@/components/cutting/cutting-pdf';
 
 type TabMode = '2d' | '1d';
 
@@ -201,6 +202,14 @@ export default function CuttingOptimizerPage() {
                 {/* Summary */}
                 <Card>
                   <CardContent className="pt-6">
+                    <div className="mb-3 flex justify-end">
+                      <CuttingPDFButton
+                        result={result}
+                        sheetWidth={sheetWidth}
+                        sheetHeight={sheetHeight}
+                        sheetPrice={typeof sheetPrice === 'number' ? sheetPrice : undefined}
+                      />
+                    </div>
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div>
                         <p className="text-2xl font-bold text-primary">{result.sheetsUsed}</p>
