@@ -33,6 +33,21 @@ model User {
   businessProfile BusinessProfile?
   cuttingProjects CuttingProject[]
   estimates       Estimate[]
+  posts           Post[]
+  comments        Comment[]
+  pointTransactions PointTransaction[]
+  articles        Article[]
+  inventories     Inventory[]
+  projects        Project[]
+  customers       Customer[]
+  expenses        Expense[]
+  receivables     Receivable[]
+  tradePosts      TradePost[]
+  auctionRequests AuctionRequest[]
+  auctionBids     AuctionBid[]
+  reviewsWritten  Review[] @relation("reviewer")
+  reviewsReceived Review[] @relation("target")
+  points          Int      @default(0)
 
   @@map("users")
 }
@@ -184,4 +199,422 @@ enum EstimateStatus {
   CONTRACTED
   COMPLETED
   REJECTED
+}
+
+// ========== PRD8: 커뮤니티 ==========
+
+model Post {
+  id        String     @id @default(cuid())
+  userId    String     @map("user_id")
+  board     String
+  title     String
+  content   String     @db.Text
+  images    String[]
+  tags      String[]
+  views     Int        @default(0)
+  likes     Int        @default(0)
+  isPinned  Boolean    @default(false) @map("is_pinned")
+  status    PostStatus @default(ACTIVE)
+
+  comments  Comment[]
+  bookmarks Bookmark[]
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("posts")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  postId    String   @map("post_id")
+  userId    String   @map("user_id")
+  parentId  String?  @map("parent_id")
+  content   String   @db.Text
+  likes     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent    Comment? @relation("replies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("replies")
+
+  @@map("comments")
+}
+
+model PointTransaction {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  amount    Int
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("point_transactions")
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  postId    String   @map("post_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@map("bookmarks")
+}
+
+enum PostStatus {
+  ACTIVE
+  HIDDEN
+  DELETED
+}
+
+// ========== PRD13: 뉴스/정보 ==========
+
+model Article {
+  id          String    @id @default(cuid())
+  authorId    String    @map("author_id")
+  title       String
+  slug        String    @unique
+  content     String    @db.Text
+  excerpt     String?
+  coverImage  String?   @map("cover_image")
+  category    String
+  tags        String[]
+  views       Int       @default(0)
+  isPublished Boolean   @default(false) @map("is_published")
+  publishedAt DateTime? @map("published_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("articles")
+}
+
+model SupportProgram {
+  id           String    @id @default(cuid())
+  title        String
+  organization String
+  description  String    @db.Text
+  target       String?
+  region       String?
+  applyStart   DateTime? @map("apply_start")
+  applyEnd     DateTime? @map("apply_end")
+  applyUrl     String?   @map("apply_url")
+  status       String    @default("active")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  @@map("support_programs")
+}
+
+// ========== PRD5: 재고 관리 ==========
+
+model Inventory {
+  id           String              @id @default(cuid())
+  userId       String              @map("user_id")
+  name         String
+  category     InventoryCategory
+  spec         String?
+  unit         String
+  quantity     Float               @default(0)
+  unitPrice    Float               @default(0) @map("unit_price")
+  minQuantity  Float?              @map("min_quantity")
+  location     String?
+  barcode      String?
+  image        String?
+
+  transactions InventoryTransaction[]
+  createdAt    DateTime            @default(now()) @map("created_at")
+  updatedAt    DateTime            @updatedAt @map("updated_at")
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("inventories")
+}
+
+model InventoryTransaction {
+  id          String          @id @default(cuid())
+  inventoryId String          @map("inventory_id")
+  type        TransactionType
+  quantity    Float
+  unitPrice   Float?          @map("unit_price")
+  note        String?
+  date        DateTime        @default(now())
+
+  inventory   Inventory       @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+
+  @@map("inventory_transactions")
+}
+
+enum InventoryCategory {
+  PANEL
+  TIMBER
+  HARDWARE
+  PAINT
+  ACCESSORY
+  OTHER
+}
+
+enum TransactionType {
+  IN
+  OUT
+}
+
+// ========== PRD6: 프로젝트 관리 ==========
+
+model Project {
+  id             String        @id @default(cuid())
+  userId         String        @map("user_id")
+  name           String
+  status         ProjectStatus @default(RECEIVED)
+
+  customerName   String        @map("customer_name")
+  customerPhone  String?       @map("customer_phone")
+  customerEmail  String?       @map("customer_email")
+  requirements   String?       @db.Text
+  startDate      DateTime?     @map("start_date")
+  deadline       DateTime?
+  budget         Float?
+  contractAmount Float?        @map("contract_amount")
+
+  shareToken     String?       @unique @map("share_token")
+
+  logs           ProjectLog[]
+  estimateId     String?       @map("estimate_id")
+
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("projects")
+}
+
+model ProjectLog {
+  id          String   @id @default(cuid())
+  projectId   String   @map("project_id")
+  date        DateTime @default(now())
+  content     String   @db.Text
+  images      String[]
+  hoursWorked Float?   @map("hours_worked")
+
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_logs")
+}
+
+enum ProjectStatus {
+  RECEIVED
+  ESTIMATING
+  CONTRACTED
+  PRODUCING
+  DELIVERING
+  COMPLETED
+  CANCELLED
+}
+
+// ========== PRD7: CRM & 매출/회계 ==========
+
+model Customer {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  name      String
+  phone     String?
+  email     String?
+  address   String?
+  tags      String[]
+  memo      String?  @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("customers")
+}
+
+model Expense {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  type        ExpenseType
+  category    String
+  amount      Float
+  description String?
+  date        DateTime    @default(now())
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("expenses")
+}
+
+model Receivable {
+  id          String           @id @default(cuid())
+  userId      String           @map("user_id")
+  customerId  String           @map("customer_id")
+  amount      Float
+  description String?
+  dueDate     DateTime         @map("due_date")
+  status      ReceivableStatus @default(PENDING)
+  paidAt      DateTime?        @map("paid_at")
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("receivables")
+}
+
+enum ExpenseType {
+  INCOME
+  EXPENSE
+}
+
+enum ReceivableStatus {
+  PENDING
+  PAID
+  OVERDUE
+}
+
+// ========== PRD9: 중고거래 ==========
+
+model TradePost {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  title       String
+  description String      @db.Text
+  images      String[]
+  price       Float?
+  tradeType   TradeType   @map("trade_type")
+  category    String
+  status      TradeStatus @default(ACTIVE)
+  region      String
+  district    String?
+
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("trade_posts")
+}
+
+enum TradeType {
+  SELL
+  BUY
+  EXCHANGE
+  FREE
+}
+
+enum TradeStatus {
+  ACTIVE
+  RESERVED
+  TRADE_COMPLETED
+  TRADE_HIDDEN
+}
+
+// ========== PRD10: 역경매 ==========
+
+model AuctionRequest {
+  id          String            @id @default(cuid())
+  userId      String            @map("user_id")
+  category    String
+  title       String
+  description String            @db.Text
+  images      String[]
+  budgetMin   Float?            @map("budget_min")
+  budgetMax   Float?            @map("budget_max")
+  deadline    DateTime?
+  region      String
+  district    String?
+  visibility  AuctionVisibility @default(PUBLIC)
+  status      AuctionStatus     @default(OPEN)
+  bidDeadline DateTime?         @map("bid_deadline")
+
+  bids        AuctionBid[]
+  contract    AuctionContract?
+
+  createdAt   DateTime          @default(now()) @map("created_at")
+  updatedAt   DateTime          @updatedAt @map("updated_at")
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("auction_requests")
+}
+
+model AuctionBid {
+  id             String    @id @default(cuid())
+  requestId      String    @map("request_id")
+  bidderId       String    @map("bidder_id")
+  price          Float
+  priceBreakdown Json?     @map("price_breakdown")
+  estimatedDays  Int?      @map("estimated_days")
+  portfolio      String[]
+  message        String?   @db.Text
+  status         BidStatus @default(SUBMITTED)
+
+  createdAt      DateTime  @default(now()) @map("created_at")
+  request        AuctionRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  bidder         User      @relation(fields: [bidderId], references: [id], onDelete: Cascade)
+
+  @@map("auction_bids")
+}
+
+model AuctionContract {
+  id          String         @id @default(cuid())
+  requestId   String         @unique @map("request_id")
+  bidId       String         @map("bid_id")
+  status      ContractStatus @default(IN_PROGRESS)
+  completedAt DateTime?      @map("completed_at")
+
+  reviews     Review[]
+  createdAt   DateTime       @default(now()) @map("created_at")
+  request     AuctionRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+
+  @@map("auction_contracts")
+}
+
+model Review {
+  id                  String   @id @default(cuid())
+  contractId          String   @map("contract_id")
+  reviewerId          String   @map("reviewer_id")
+  targetId            String   @map("target_id")
+  rating              Float
+  qualityRating       Float?   @map("quality_rating")
+  communicationRating Float?   @map("communication_rating")
+  punctualityRating   Float?   @map("punctuality_rating")
+  priceRating         Float?   @map("price_rating")
+  content             String?  @db.Text
+  images              String[]
+  reply               String?  @db.Text
+
+  createdAt           DateTime @default(now()) @map("created_at")
+  contract            AuctionContract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  reviewer            User     @relation("reviewer", fields: [reviewerId], references: [id], onDelete: Cascade)
+  target              User     @relation("target", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+enum AuctionVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum AuctionStatus {
+  OPEN
+  BIDDING
+  SELECTED
+  AUCTION_CONTRACTED
+  AUCTION_COMPLETED
+  CANCELLED
+}
+
+enum BidStatus {
+  SUBMITTED
+  SELECTED
+  BID_REJECTED
+}
+
+enum ContractStatus {
+  IN_PROGRESS
+  CONTRACT_COMPLETED
+  DISPUTED
 }
