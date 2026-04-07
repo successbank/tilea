@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import { ForgotPasswordForm } from '@/components/auth/forgot-password-form';
 

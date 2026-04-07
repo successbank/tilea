@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import { SocialLoginButtons } from '@/components/auth/social-login-buttons';
 import { LoginForm } from '@/components/auth/login-form';

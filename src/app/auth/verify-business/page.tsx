@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { VerifyBusinessForm } from '@/components/business/verify-business-form';
 
 export default function VerifyBusinessPage() {
