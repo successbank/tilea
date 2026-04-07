@@ -53,3 +53,7 @@ next-env.d.ts
 
 # Docs build artifacts
 docs/superpowers/plans/*.draft.md
+
+# Build artifacts (root level)
+.next/
+.playwright-mcp/
