@@ -1,0 +1,152 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Coolify" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - combobox [ref=e7]:
+          - option "Switch team" [disabled]
+          - option "Root Team" [selected]
+      - button "Open sidebar" [ref=e8]:
+        - generic [ref=e9]: Open sidebar
+        - img [ref=e10]
+    - main [ref=e12]:
+      - generic [ref=e14]:
+        - heading "Dashboard" [level=1] [ref=e15]
+        - generic [ref=e16]: Your self-hosted infrastructure.
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - heading "Projects" [level=3] [ref=e19]
+            - button [ref=e22] [cursor=pointer]:
+              - img [ref=e23]
+          - generic [ref=e25]:
+            - generic [ref=e26] [cursor=pointer]:
+              - link [ref=e27]:
+                - /url: http://103.124.103.232:8000/project/bcwk4ow4cwk080g0sokckksc/environment/wgo008gs044swg4c8k84kw88
+              - generic [ref=e28]:
+                - generic [ref=e29]:
+                  - generic [ref=e30]: auto1978.com
+                  - generic [ref=e31]: 박민중고차 중계 사이트
+                - generic [ref=e32]:
+                  - link "+ Add Resource" [ref=e33]:
+                    - /url: http://103.124.103.232:8000/project/bcwk4ow4cwk080g0sokckksc/environment/wgo008gs044swg4c8k84kw88/new
+                  - link "Settings" [ref=e34]:
+                    - /url: http://103.124.103.232:8000/project/bcwk4ow4cwk080g0sokckksc/edit
+            - generic [ref=e35] [cursor=pointer]:
+              - link [ref=e36]:
+                - /url: http://103.124.103.232:8000/project/zoswcwcw0k8o4kcc0ggcko40/environment/agoo00ks4o0w88wog00og888
+              - generic [ref=e37]:
+                - generic [ref=e39]: ebook.ebooknara.com
+                - generic [ref=e40]:
+                  - link "+ Add Resource" [ref=e41]:
+                    - /url: http://103.124.103.232:8000/project/zoswcwcw0k8o4kcc0ggcko40/environment/agoo00ks4o0w88wog00og888/new
+                  - link "Settings" [ref=e42]:
+                    - /url: http://103.124.103.232:8000/project/zoswcwcw0k8o4kcc0ggcko40/edit
+            - generic [ref=e43] [cursor=pointer]:
+              - link [ref=e44]:
+                - /url: http://103.124.103.232:8000/project/l004ww8s8o00oss84w8swgo8
+              - generic [ref=e45]:
+                - generic [ref=e46]:
+                  - generic [ref=e47]: ebooknara.com
+                  - generic [ref=e48]: ebooknara server
+                - generic [ref=e49]:
+                  - link "+ Add Resource" [ref=e50]:
+                    - /url: http://103.124.103.232:8000/project/l004ww8s8o00oss84w8swgo8/environment/wcsws8cok8wgo808cg80c8ok/new
+                  - link "Settings" [ref=e51]:
+                    - /url: http://103.124.103.232:8000/project/l004ww8s8o00oss84w8swgo8/edit
+            - generic [ref=e52] [cursor=pointer]:
+              - link [ref=e53]:
+                - /url: http://103.124.103.232:8000/project/zssgkwos8scs8ssgoks4k04c/environment/qcc4co40wsgwg4kgcgs4k08w
+              - generic [ref=e54]:
+                - generic [ref=e55]:
+                  - generic [ref=e56]: kidbell.kr
+                  - generic [ref=e57]: pino-service-successbank
+                - generic [ref=e58]:
+                  - link "+ Add Resource" [ref=e59]:
+                    - /url: http://103.124.103.232:8000/project/zssgkwos8scs8ssgoks4k04c/environment/qcc4co40wsgwg4kgcgs4k08w/new
+                  - link "Settings" [ref=e60]:
+                    - /url: http://103.124.103.232:8000/project/zssgkwos8scs8ssgoks4k04c/edit
+            - generic [ref=e61] [cursor=pointer]:
+              - link [ref=e62]:
+                - /url: http://103.124.103.232:8000/project/vx3ugbrfru34zeyj2tytsx7n/environment/dtb0emglgtcl4wzawri2nae3
+              - generic [ref=e63]:
+                - generic [ref=e64]:
+                  - generic [ref=e65]: lvs.co.kr
+                  - generic [ref=e66]: lvs company
+                - generic [ref=e67]:
+                  - link "+ Add Resource" [ref=e68]:
+                    - /url: http://103.124.103.232:8000/project/vx3ugbrfru34zeyj2tytsx7n/environment/dtb0emglgtcl4wzawri2nae3/new
+                  - link "Settings" [ref=e69]:
+                    - /url: http://103.124.103.232:8000/project/vx3ugbrfru34zeyj2tytsx7n/edit
+            - generic [ref=e70] [cursor=pointer]:
+              - link [ref=e71]:
+                - /url: http://103.124.103.232:8000/project/kzqeqbzcb292m6u5ovjno4jx/environment/qzld7yjwdvt1r42bx3cf8c6a
+              - generic [ref=e72]:
+                - generic [ref=e73]:
+                  - generic [ref=e74]: mannatalk.com
+                  - generic [ref=e75]: mannatech service
+                - generic [ref=e76]:
+                  - link "+ Add Resource" [ref=e77]:
+                    - /url: http://103.124.103.232:8000/project/kzqeqbzcb292m6u5ovjno4jx/environment/qzld7yjwdvt1r42bx3cf8c6a/new
+                  - link "Settings" [ref=e78]:
+                    - /url: http://103.124.103.232:8000/project/kzqeqbzcb292m6u5ovjno4jx/edit
+            - generic [ref=e79] [cursor=pointer]:
+              - link [ref=e80]:
+                - /url: http://103.124.103.232:8000/project/bog0cg8sw40wsw4ok4844scg/environment/swk8kgs8wcwcog0o888w44sw
+              - generic [ref=e81]:
+                - generic [ref=e82]:
+                  - generic [ref=e83]: president21.go.kr
+                  - generic [ref=e84]: korea president global business books
+                - generic [ref=e85]:
+                  - link "+ Add Resource" [ref=e86]:
+                    - /url: http://103.124.103.232:8000/project/bog0cg8sw40wsw4ok4844scg/environment/swk8kgs8wcwcog0o888w44sw/new
+                  - link "Settings" [ref=e87]:
+                    - /url: http://103.124.103.232:8000/project/bog0cg8sw40wsw4ok4844scg/edit
+            - generic [ref=e88] [cursor=pointer]:
+              - link [ref=e89]:
+                - /url: http://103.124.103.232:8000/project/o4cgww804sog8kkcwkwcwwcs/environment/iw480gow840c4sgs408sokk4
+              - generic [ref=e90]:
+                - generic [ref=e91]:
+                  - generic [ref=e92]: shdb.co.kr
+                  - generic [ref=e93]: shinhanDB
+                - generic [ref=e94]:
+                  - link "+ Add Resource" [ref=e95]:
+                    - /url: http://103.124.103.232:8000/project/o4cgww804sog8kkcwkwcwwcs/environment/iw480gow840c4sgs408sokk4/new
+                  - link "Settings" [ref=e96]:
+                    - /url: http://103.124.103.232:8000/project/o4cgww804sog8kkcwkwcwwcs/edit
+            - generic [ref=e97] [cursor=pointer]:
+              - link [ref=e98]:
+                - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj
+              - generic [ref=e99]:
+                - generic [ref=e100]:
+                  - generic [ref=e101]: tilea.kr
+                  - generic [ref=e102]: wood
+                - generic [ref=e103]:
+                  - link "+ Add Resource" [ref=e104]:
+                    - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/new
+                  - link "Settings" [ref=e105]:
+                    - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/edit
+            - generic [ref=e106] [cursor=pointer]:
+              - link [ref=e107]:
+                - /url: http://103.124.103.232:8000/project/lvqpi9mql049tn7hrt4n3q2j/environment/p11h8z7ue1fnp6opd73r0jit
+              - generic [ref=e108]:
+                - generic [ref=e109]:
+                  - generic [ref=e110]: toes.kr
+                  - generic [ref=e111]: toes.kr WordPress Blog
+                - generic [ref=e112]:
+                  - link "+ Add Resource" [ref=e113]:
+                    - /url: http://103.124.103.232:8000/project/lvqpi9mql049tn7hrt4n3q2j/environment/p11h8z7ue1fnp6opd73r0jit/new
+                  - link "Settings" [ref=e114]:
+                    - /url: http://103.124.103.232:8000/project/lvqpi9mql049tn7hrt4n3q2j/edit
+        - generic [ref=e115]:
+          - generic [ref=e116]:
+            - heading "Servers" [level=3] [ref=e117]
+            - button [ref=e120] [cursor=pointer]:
+              - img [ref=e121]
+          - link "localhost This is the server where Coolify is running on. Don't delete this!" [ref=e124] [cursor=pointer]:
+            - /url: http://103.124.103.232:8000/server/a84cw0so0s0w48sw04co4skk
+            - generic [ref=e125]:
+              - generic [ref=e126]: localhost
+              - generic [ref=e127]: This is the server where Coolify is running on. Don't delete this!
+  - img
+  - list

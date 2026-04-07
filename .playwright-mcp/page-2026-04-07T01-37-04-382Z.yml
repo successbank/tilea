@@ -1,0 +1,275 @@
+- generic [active] [ref=e48]:
+  - generic [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - link "Coolify" [ref=e52] [cursor=pointer]:
+          - /url: /
+        - combobox [ref=e54]:
+          - option "Switch team" [disabled]
+          - option "Root Team" [selected]
+      - button "Open sidebar" [ref=e55]:
+        - generic [ref=e56]: Open sidebar
+        - img [ref=e57]
+    - main [ref=e59]:
+      - generic [ref=e61]:
+        - heading "Configuration" [level=1] [ref=e62]
+        - generic [ref=e283]:
+          - generic [ref=e285]:
+            - heading "The latest configuration has not been applied" [level=4] [ref=e286]
+            - generic [ref=e287]: Please redeploy to apply the new configuration.
+          - button [ref=e288]:
+            - img [ref=e289]
+        - navigation [ref=e63]:
+          - navigation [ref=e64]:
+            - list [ref=e65]:
+              - listitem [ref=e66]:
+                - generic [ref=e67]:
+                  - link "tilea.kr" [ref=e68] [cursor=pointer]:
+                    - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1
+                  - button [ref=e69]:
+                    - img [ref=e70]
+              - listitem [ref=e72]:
+                - generic [ref=e73]:
+                  - link "production" [ref=e74] [cursor=pointer]:
+                    - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj
+                  - button [ref=e75]:
+                    - img [ref=e76]
+              - listitem [ref=e78]:
+                - link "tilea-kr (localhost)" [ref=e79] [cursor=pointer]:
+                  - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km
+              - generic [ref=e81]:
+                - link "Running" [ref=e84] [cursor=pointer]:
+                  - /url: https://github.com/successbank/tilea.git/commit/6fc59fd40129ec5006be632d5e80fb57dfc79c9b
+                - generic [ref=e85]: (healthy)
+              - button "Refresh Status" [ref=e86]:
+                - img [ref=e87]
+          - generic [ref=e89]:
+            - navigation [ref=e90]:
+              - link "Configuration" [ref=e91] [cursor=pointer]:
+                - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km
+              - link "Deployments" [ref=e92] [cursor=pointer]:
+                - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/deployment
+              - link "Logs" [ref=e93] [cursor=pointer]:
+                - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/logs
+                - generic [ref=e94]: Logs
+              - link "Terminal" [ref=e95] [cursor=pointer]:
+                - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/terminal
+              - button "Links" [ref=e97]:
+                - generic [ref=e98]: Links
+                - img [ref=e99]
+            - generic [ref=e101]:
+              - button "Advanced" [ref=e104]:
+                - generic [ref=e105]: Advanced
+                - img [ref=e106]
+              - generic [ref=e108]:
+                - button "Redeploy" [ref=e109] [cursor=pointer]:
+                  - img [ref=e110]
+                  - text: Redeploy
+                - button "Stop" [ref=e113] [cursor=pointer]:
+                  - img [ref=e114]
+                  - text: Stop
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - link "General" [ref=e118] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km
+              - generic [ref=e119]: General
+            - link "Advanced" [ref=e120] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/advanced
+              - generic [ref=e121]: Advanced
+            - link "Environment Variables" [ref=e122] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/environment-variables
+              - generic [ref=e123]: Environment Variables
+            - link "Persistent Storage" [ref=e124] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/persistent-storage
+              - generic [ref=e125]: Persistent Storage
+            - link "Git Source" [ref=e126] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/source
+              - generic [ref=e127]: Git Source
+            - link "Servers" [ref=e128] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/servers
+              - generic [ref=e129]: Servers
+            - link "Scheduled Tasks" [ref=e130] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/scheduled-tasks
+              - generic [ref=e131]: Scheduled Tasks
+            - link "Webhooks" [ref=e132] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/webhooks
+              - generic [ref=e133]: Webhooks
+            - link "Preview Deployments" [ref=e134] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/preview-deployments
+              - generic [ref=e135]: Preview Deployments
+            - link "Rollback" [ref=e136] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/rollback
+              - generic [ref=e137]: Rollback
+            - link "Resource Limits" [ref=e138] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/resource-limits
+              - generic [ref=e139]: Resource Limits
+            - link "Resource Operations" [ref=e140] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/resource-operations
+              - generic [ref=e141]: Resource Operations
+            - link "Metrics" [ref=e142] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/metrics
+              - generic [ref=e143]: Metrics
+            - link "Tags" [ref=e144] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/tags
+              - generic [ref=e145]: Tags
+            - link "Danger Zone" [ref=e146] [cursor=pointer]:
+              - /url: http://103.124.103.232:8000/project/u9jf9s1wpwbyv6l9garuadm1/environment/g3dqy68naroc58l8x35n5qbj/application/wlpdujfmwh9ctgwdzyuwu5km/danger
+              - generic [ref=e147]: Danger Zone
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - heading "General" [level=2] [ref=e152]
+              - button "Save" [ref=e153] [cursor=pointer]
+              - button "Reload Compose File" [ref=e154] [cursor=pointer]
+            - generic [ref=e155]: General configuration for your application.
+            - generic [ref=e156]:
+              - generic [ref=e157]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]:
+                    - text: Name
+                    - generic [ref=e160]: "*"
+                  - textbox [ref=e291]: tilea-kr
+                - generic [ref=e162]:
+                  - generic [ref=e163]: Description
+                  - textbox [ref=e292]
+              - generic [ref=e165]:
+                - generic [ref=e167]:
+                  - generic [ref=e168]:
+                    - text: Build Pack
+                    - generic [ref=e169]: "*"
+                  - combobox [ref=e293]:
+                    - option "Nixpacks"
+                    - option "Static"
+                    - option "Dockerfile"
+                    - option "Docker Compose" [selected]
+                - heading "Domains" [level=3] [ref=e171]
+                - generic [ref=e172]:
+                  - generic [ref=e173]:
+                    - generic [ref=e174]:
+                      - text: Domains for app
+                      - img [ref=e177] [cursor=pointer]
+                    - textbox [ref=e294]: https://tilea.kr
+                  - button "Generate Domain" [ref=e180] [cursor=pointer]
+              - generic [ref=e182]:
+                - heading "Build" [level=3] [ref=e183]
+                - generic [ref=e185]:
+                  - generic [ref=e186]:
+                    - generic [ref=e187]:
+                      - generic [ref=e188]:
+                        - text: Base Directory
+                        - img [ref=e191] [cursor=pointer]
+                      - textbox / [ref=e295]
+                    - generic [ref=e194]:
+                      - generic [ref=e195]:
+                        - text: Docker Compose Location
+                        - img [ref=e198] [cursor=pointer]
+                      - textbox "/docker-compose.yaml" [ref=e296]: /docker-compose.prod.yml
+                  - generic [ref=e203]:
+                    - generic [ref=e204]:
+                      - text: Preserve Repository During Deployment
+                      - img [ref=e207] [cursor=pointer]
+                    - checkbox "Preserve Repository During Deployment" [ref=e297] [cursor=pointer]
+                  - generic [ref=e210]: The following commands are for advanced use cases. Only modify them if you know what are you doing.
+                  - generic [ref=e211]:
+                    - generic [ref=e212]:
+                      - generic [ref=e213]:
+                        - text: Custom Build Command
+                        - img [ref=e216] [cursor=pointer]
+                      - textbox "docker compose build" [ref=e298]
+                    - generic [ref=e219]:
+                      - generic [ref=e220]:
+                        - text: Custom Start Command
+                        - img [ref=e223] [cursor=pointer]
+                      - textbox "docker compose up -d" [ref=e299]
+              - generic [ref=e226]:
+                - generic [ref=e227]:
+                  - heading "Docker Compose" [level=3] [ref=e228]
+                  - button "Show Deployable Compose" [ref=e229] [cursor=pointer]
+                - generic [ref=e231]:
+                  - generic [ref=e232]:
+                    - text: Docker Compose Content (raw)
+                    - img [ref=e235] [cursor=pointer]
+                  - code [ref=e304]:
+                    - generic [ref=e305]:
+                      - generic [ref=e307]:
+                        - generic [ref=e308]:
+                          - generic [ref=e310] [cursor=pointer]: 
+                          - generic [ref=e311]: "1"
+                        - generic [ref=e312]:
+                          - generic [ref=e313] [cursor=pointer]: 
+                          - generic [ref=e314]: "2"
+                        - generic [ref=e315]:
+                          - generic [ref=e316] [cursor=pointer]: 
+                          - generic [ref=e317]: "3"
+                        - generic [ref=e319]: "4"
+                        - generic [ref=e321]: "5"
+                        - generic [ref=e323]: "6"
+                        - generic [ref=e325]: "7"
+                        - generic [ref=e327]: "8"
+                        - generic [ref=e328]:
+                          - generic [ref=e329] [cursor=pointer]: 
+                          - generic [ref=e330]: "9"
+                        - generic [ref=e331]:
+                          - generic [ref=e332] [cursor=pointer]: 
+                          - generic [ref=e333]: "10"
+                        - generic [ref=e335]: "11"
+                        - generic [ref=e337]: "12"
+                        - generic [ref=e339]: "13"
+                        - generic [ref=e341]: "14"
+                      - generic [ref=e400]:
+                        - generic [ref=e402]: "services:"
+                        - generic [ref=e404]: "app:"
+                        - generic [ref=e406]: "build:"
+                        - generic [ref=e408]: "context: ."
+                        - generic [ref=e410]: "dockerfile: Dockerfile"
+                        - generic [ref=e412]: "restart: unless-stopped"
+                        - generic [ref=e414]: "mem_limit: 512m"
+                        - generic [ref=e416]: "memswap_limit: 768m"
+                        - generic [ref=e418]: "healthcheck:"
+                        - generic [ref=e420]: "test:"
+                        - generic [ref=e422]: "- CMD"
+                        - generic [ref=e424]: "- node"
+                        - generic [ref=e426]: "- '-e'"
+                        - generic [ref=e428]: "- \"fetch('http://localhost:3000/api/"
+                        - generic [ref=e430]: "health').then(r=>{if(!r.ok)throw 1;"
+                      - textbox "Editor content" [ref=e432]
+                - generic [ref=e244]:
+                  - generic [ref=e245]:
+                    - text: Escape special characters in labels?
+                    - img [ref=e248] [cursor=pointer]
+                  - checkbox "Escape special characters in labels?" [checked] [ref=e433] [cursor=pointer]
+              - heading "Pre/Post Deployment Commands" [level=3] [ref=e251]
+              - generic [ref=e252]:
+                - generic [ref=e253]:
+                  - generic [ref=e254]:
+                    - text: Pre-deployment
+                    - img [ref=e257] [cursor=pointer]
+                  - textbox "php artisan migrate" [ref=e434]
+                - generic [ref=e260]:
+                  - generic [ref=e261]:
+                    - text: Container Name
+                    - img [ref=e264] [cursor=pointer]
+                  - textbox [ref=e435]
+              - generic [ref=e267]:
+                - generic [ref=e268]:
+                  - generic [ref=e269]:
+                    - text: Post-deployment
+                    - img [ref=e272] [cursor=pointer]
+                  - textbox "php artisan migrate" [ref=e436]
+                - generic [ref=e275]:
+                  - generic [ref=e276]:
+                    - text: Container Name
+                    - img [ref=e279] [cursor=pointer]
+                  - textbox [ref=e437]
+  - list [ref=e438]:
+    - listitem [ref=e439]:
+      - generic [ref=e440]:
+        - generic [ref=e441]:
+          - generic [ref=e442]:
+            - img [ref=e443]
+            - paragraph [ref=e445]: Success
+          - generic [ref=e446]: Application settings updated!
+        - img [ref=e448] [cursor=pointer]
+        - img [ref=e451] [cursor=pointer]
+  - generic [ref=e453]:
+    - alert
+    - alert
