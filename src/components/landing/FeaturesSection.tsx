@@ -11,8 +11,8 @@ export default function FeaturesSection() {
   return (
     <section id="features" className="bg-surface-alt py-24 px-6">
       <div className="max-w-[1200px] mx-auto text-center mb-16">
-        <h2 className="text-3xl font-bold font-headline mb-4">정밀 서비스</h2>
-        <p className="text-muted max-w-2xl mx-auto">워크숍의 효율을 극대화하는 6가지 핵심 디지털 솔루션</p>
+        <h2 className="text-3xl font-bold font-headline mb-4">서비스안내</h2>
+        <p className="text-muted max-w-2xl mx-auto">틸레아를 효율을 극대화하는 6가지 핵심 디지털 솔루션</p>
       </div>
       <div className="grid tablet:grid-cols-2 desktop:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
         {features.map((f) => (
