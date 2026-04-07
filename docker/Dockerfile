@@ -18,8 +18,10 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 ENV DATABASE_URL="postgresql://fake:fake@localhost:5432/fake"
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS="--max_old_space_size=2048"
 RUN npx prisma generate
-RUN npm run build
+RUN npm run build 2>&1 || (echo "BUILD FAILED - showing error" && npm run build 2>&1 && exit 1)
 
 # Production stage
 FROM base AS production
