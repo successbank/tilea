@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { redis } from '@/lib/redis';
+
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const checks: Record<string, string> = {};
 
   try {
+    const { prisma } = await import('@/lib/prisma');
     await prisma.$queryRaw`SELECT 1`;
     checks.database = 'ok';
   } catch {
@@ -13,6 +14,7 @@ export async function GET() {
   }
 
   try {
+    const { redis } = await import('@/lib/redis');
     const pong = await redis.ping();
     checks.redis = pong === 'PONG' ? 'ok' : 'error';
   } catch {
