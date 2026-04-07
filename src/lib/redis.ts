@@ -4,7 +4,8 @@ const getRedisClient = () => {
   const redisUrl = process.env.REDIS_URL;
 
   if (!redisUrl) {
-    throw new Error('REDIS_URL environment variable is not set');
+    // During build time, return a stub client
+    return new Redis({ lazyConnect: true, enableOfflineQueue: false });
   }
 
   return new Redis(redisUrl, {

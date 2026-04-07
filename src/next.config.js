@@ -4,6 +4,9 @@ const nextConfig = {
   output: 'standalone',
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client', 'prisma', 'bcryptjs'],
+  },
   images: {
     remotePatterns: [
       {
